@@ -1,0 +1,60 @@
+.tile {
+    position: relative;
+}
+
+.tile__fig {
+    position: relative;
+    width: 100%;
+
+    &::before {
+        content: '';
+
+        display: block;
+        padding-top: 136.36%;
+    }
+}
+
+.tile__img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transition: opacity .3s;
+
+    &.is-loaded {
+        opacity: 0;
+    }
+}
+
+.tile__content {
+    position: absolute;
+    bottom: 3.6rem;
+    left: 0;
+    width: 100%;
+
+    font-size: 1.4rem;
+
+    transition: color .3s;
+
+    .tile:hover & {
+        color: #fff;
+    }
+}
+
+
+.tile__title {
+    margin-left: -45%;
+
+    white-space: nowrap;
+}
+
+.tile__cta {
+    display: inline-block;
+    margin-top: 2rem;
+    margin-left: -11%;
+
+    border-bottom: .1rem solid;
+}

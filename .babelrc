@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "targets": {
+            "browsers": ["ie >= 10", "> 1%"]
+        }
+      }
+    ]
+  ]
+}

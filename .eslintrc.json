@@ -1,0 +1,54 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "import"
+    ],
+    "parser": "babel-eslint",
+    "env": { "browser": true },
+    "globals": {
+      "APP": true,
+      "Linear": true,
+      "Cubic": true,
+      "Quad": true,
+      "Expo": true,
+      "Power1": true,
+      "Power2": true,
+      "Power3": true,
+      "Power4": true,
+      "Elastic": true,
+      "Back": true,
+      "Strong": true,
+      "ExpoScaleEase": true,
+      "TimelineMax": true,
+      "ga": true
+    },
+    "rules": {
+      "no-use-before-define": "off",
+      "react/forbid-prop-types": "off",
+      "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
+      "semi": ["error", "never"],
+      "key-spacing": [0],
+      "no-multi-spaces": [1, {
+        "exceptions": {
+          "Property": true,
+          "VariableDeclarator": true,
+          "AssignmentExpression": true
+        }
+      }],
+      "no-multiple-empty-lines": [1, {
+        "max": 4
+      }],
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "max-len": [1, 130],
+      "indent": ["error", 4, { "SwitchCase": 1 }],
+      "no-param-reassign": [2, { "props": false }],
+      "padded-blocks": ["error", { "blocks": "never", "classes": "always" }],
+      "object-curly-newline": ["error", {
+        "ObjectExpression": { "minProperties": 6, "multiline": true, "consistent": true },
+        "ObjectPattern": { "minProperties": 6, "multiline": true, "consistent": true }
+      }]
+    }
+}
+
+
+

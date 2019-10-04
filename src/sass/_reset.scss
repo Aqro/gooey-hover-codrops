@@ -1,0 +1,116 @@
+
+/* RESET
+---------------------------------------------------------------------------------------------------- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+
+    font-size: 100%;
+
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+html { font-size: 62.5%; } // = 10px
+
+body { line-height: 1; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, main { display: block; }
+
+ul,
+ol { list-style: none; }
+
+blockquote,
+q { quotes: none; }
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: '';
+    content: none;
+}
+
+a,
+input,
+button,
+select,
+textarea {
+    appearance: none;
+    text-decoration: none;
+    outline: none;
+}
+
+a {
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+
+    font-size: 100%;
+    color: inherit;
+
+    background: transparent;
+    outline: none;
+}
+
+button {
+    padding: 0;
+    cursor: pointer;
+}
+
+ins {
+    text-decoration: none;
+    color: #000;
+
+    background-color: #ff9;
+}
+
+mark {
+    font-style: italic;
+    font-weight: 700;
+    color: #000;
+
+    background-color: #ff9;
+}
+
+del { text-decoration: line-through; }
+
+abbr[title],
+dfn[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    padding: 0;
+
+    border: none;
+}
+
+input,
+select { vertical-align: middle; }
+
+
+

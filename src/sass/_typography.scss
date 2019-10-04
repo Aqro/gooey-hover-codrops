@@ -1,0 +1,20 @@
+.title {
+    font-family: 'orpheuspro', serif;
+    font-style: normal;
+    font-weight: 400;
+
+    text-transform: uppercase;
+
+    &--medium {
+        font-size: calc(2rem + 2.5vw);
+    }
+}
+
+.title__offset {
+    display: block;
+    margin-left: 15%;
+
+    &--medium {
+        margin-left: 23%;
+    }
+}
