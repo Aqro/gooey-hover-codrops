@@ -1,4 +1,8 @@
 
+
+
+/* MAIN
+--------------------------------------------------------- */
 body {
     font-family: 'Source Code Pro', monospace;
     font-size: 1.4rem;
@@ -22,6 +26,10 @@ body {
     padding: 9rem 5vw 5rem;
 
     color: #fff;
+
+    @include maxw($bp-mobile) {
+        padding-top: 0;
+    }
 }
 
 .scrollarea {
@@ -45,4 +53,17 @@ body {
     color: var(--textColor);
 
     opacity: .1;
+}
+
+.line-ctn {
+    display: block;
+    overflow: hidden;
+}
+
+.btn-inline {
+    display: inline-block;
+
+    line-height: 1.5;
+
+    border-bottom: .1rem solid;
 }

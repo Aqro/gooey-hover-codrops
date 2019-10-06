@@ -6,13 +6,15 @@
 .slideshow__progress-ctn {
     overflow: hidden;
     position: absolute;
-    bottom: 5rem;
+    bottom: 5%;
     left: calc(50% - 6.5rem);
     width: 13rem;
     height: .4rem;
 
     background-color: rgba(255, 255, 255, .2);
     border-radius: .4rem;
+
+    will-change: transform;
 }
 
 .slideshow__progress {
@@ -37,23 +39,30 @@
 }
 
 .slideshow-list__el {
-    flex: 0 0 calc(25% + 2vmax);
-    margin-left: 20vw;
+    flex: 0 0 calc(50% + 10vmax);
+    margin-left: 15vw;
 
     &:last-child {
         padding-right: 10vw;
         box-sizing: content-box;
     }
 
-    @for $i from 1 to 11 {
+    @for $i from 1 to 6 {
         $offset: if($i % 2 == 0, -1, 1);
 
         &:nth-child(#{$i}) {
-            transform: translateY(#{8vh * $offset});
-
             .tile__content {
-                color: var(--color-text#{$i % 4});
+                color: var(--color-text#{$i});
+            }
+
+            @include minw($bp-tablet) {
+                transform: translateY(#{8vh * $offset});
             }
         }
+    }
+
+    @include minw($bp-mobile) {
+        flex: 0 0 calc(25% + 2vmax);
+        margin-left: 20vw;
     }
 }

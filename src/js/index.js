@@ -1,5 +1,6 @@
 import '../sass/styles.scss'
 import Stage from './Stage'
+import Layout from './Layout'
 
 const APP = window.APP || {}
 
@@ -11,6 +12,7 @@ const initApp = () => {
     window.APP = APP
 
     APP.Stage = new Stage()
+    APP.Layout = new Layout()
 }
 
 if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {

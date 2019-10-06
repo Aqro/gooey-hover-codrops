@@ -8,6 +8,10 @@
     &--medium {
         font-size: calc(2rem + 2.5vw);
     }
+
+    &--large {
+        font-size: calc(10rem + 3vw);
+    }
 }
 
 .title__offset {
@@ -15,6 +19,8 @@
     margin-left: 15%;
 
     &--medium {
-        margin-left: 23%;
+        @include minw($bp-mobile) {
+            margin-left: 23%;
+        }
     }
 }

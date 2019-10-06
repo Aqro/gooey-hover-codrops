@@ -1,0 +1,87 @@
+
+@keyframes rotate {
+    to { transform: rotate(1turn); }
+}
+
+/* DETAIL VIEW
+---------------------------------------------------------------------------------------------------- */
+
+.detail-view {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    min-height: 100vh;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    // transition: opacity .3s;
+
+    &.is-interactive {
+        pointer-events: all;
+    }
+
+    &.is-visible {
+        opacity: 1;
+    }
+}
+
+.detail-view__inner {
+    @extend .scroll-content;
+    padding-left: 10vw;
+}
+
+/* Content
+--------------------------------------------------------- */
+
+.detail-view__title {
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+
+    color: var(--color-text);
+}
+
+.detail-view__content {
+    p {
+        width: 100%;
+        max-width: 35vw;
+
+        font-size: 1.8rem;
+        line-height: 1.7;
+
+        opacity: .7;
+    }
+}
+
+
+/* Button
+--------------------------------------------------------- */
+
+.close-detail {
+    position: relative;
+
+    background: transparent;
+    border: 0;
+}
+
+.close-detail__path {
+    fill: var(--color-text);
+}
+
+.close-detail__back {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+
+}
+
+.close-detail__round {
+    animation: rotate 40s linear infinite;
+}

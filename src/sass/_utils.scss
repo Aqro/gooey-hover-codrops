@@ -1,0 +1,40 @@
+/* Media Queries
+--------------------------------------------------------- */
+
+// Minimum WIDTH
+@mixin minw($val) {
+    @media only screen and (min-width: $val) {
+        @content;
+    }
+}
+
+// Maximum WIDTH
+@mixin maxw($val) {
+    @media only screen and (max-width: #{$val - 1}) {
+        @content;
+    }
+}
+
+// Minimum HEIGHT
+@mixin minh($val) {
+    @media only screen and (min-height: $val) {
+        @content;
+    }
+}
+
+// Maximum HEIGHT
+@mixin maxh($val) {
+    @media only screen and (max-height: #{$val - 1}) {
+        @content;
+    }
+}
+
+// Minimum WIDTH & Maximum WIDTH
+@mixin minw-maxw($minw, $maxw) {
+    @media only screen and (min-width: $minw) and (max-width: #{$val - 1}) {
+        @content;
+    }
+}
+
+$bp-mobile: 768px;
+$bp-tablet: 1112px;

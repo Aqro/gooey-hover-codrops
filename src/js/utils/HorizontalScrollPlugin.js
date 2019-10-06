@@ -6,7 +6,7 @@ export default class HorizontalScrollPlugin extends Scrollbar.ScrollbarPlugin {
         if (this.shouldInvertDelta(fromEvent)) {
             return {
                 x: delta.y,
-                y: delta.x,
+                y: delta.y,
             }
         }
 

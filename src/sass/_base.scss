@@ -8,9 +8,13 @@
     --color-text1: #deedcf;
     --color-text2: #ffcbcc;
     --color-text3: #b9e6e3;
+    --color-text4: #e1d0a1;
+    --color-text5: #ccd3f6;
     --color-bg1: #3f4849;
     --color-bg2: #493f46;
     --color-bg3: #2b3242;
+    --color-bg4: #3b3232;
+    --color-bg5: #2d3a40;
     --color-text: var(--color-text1);
     --color-bg: var(--color-bg1);
     --color-link: var(--color-text);
@@ -95,6 +99,17 @@ a:focus {
     text-align: center;
     position: relative;
     z-index: 1000;
+
+    @include maxw($bp-tablet) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @include maxw($bp-mobile) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .frame__title {
@@ -105,6 +120,12 @@ a:focus {
 
 .frame__links {
     display: flex;
+
+    @include maxw($bp-mobile) {
+        justify-content: center;
+
+        text-decoration: underline;
+    }
 }
 
 .frame__links a:not(:last-child) {
@@ -117,6 +138,11 @@ a:focus {
 
 .frame__demos {
     margin: 1rem 0;
+
+    @include maxw($bp-mobile) {
+        order: -1;
+        margin: 0 0 3rem;
+    }
 }
 
 .frame__demo {
@@ -140,11 +166,11 @@ a:focus {
 .content {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: calc(100vh - 13rem);
-    position: relative;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 32rem);
 }
 
 @media screen and (min-width: 53em) {
