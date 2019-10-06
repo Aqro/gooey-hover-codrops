@@ -1,10 +1,29 @@
 import * as THREE from 'three'
-import { TweenMax as TM, Power2, TimelineMax as TL } from 'gsap'
 import Tile from './Tile'
 import DetailView from './Detail'
-import { getRatio, ev } from './utils/utils'
+import { ev } from './utils/utils'
+
+import trippyShader from '../glsl/trippyShader.glsl'
+import shapeShader from '../glsl/shapeShader.glsl'
+import revealShader from '../glsl/revealShader.glsl'
 
 const perspective = 800
+
+const shaders = [
+    trippyShader,
+    revealShader,
+    shapeShader,
+    trippyShader,
+    shapeShader,
+]
+
+const durations = [
+    0.5,
+    1.2,
+    0.5,
+    0.5,
+    0.5,
+]
 
 export default class Scene {
 
@@ -45,7 +64,7 @@ export default class Scene {
         this.renderer.setSize(this.W, this.H)
         this.renderer.setPixelRatio(window.devicePixelRatio)
 
-        this.tiles = Array.from(this.$tiles).map(($el) => new Tile($el, this))
+        this.tiles = Array.from(this.$tiles).map(($el, i) => new Tile($el, this, durations[i], shaders[i]))
 
         this.update()
     }

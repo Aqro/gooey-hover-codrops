@@ -6,7 +6,6 @@ uniform sampler2D u_hovermap;
 
 uniform float u_alpha;
 uniform float u_time;
-uniform float u_progress;
 uniform float u_progressHover;
 uniform float u_progressClick;
 
@@ -66,7 +65,7 @@ void main() {
   vec4 image = texture2D(u_hovermap, uv_h);
   vec4 imageDistorted = texture2D(u_map, uv + vec2(nh) * progressHover);
 
-  float finalMask = smoothstep(.95, 1., pow(c, 2.) * 4. + nc * (1. - progress));
+  float finalMask = smoothstep(.99, 1., pow(c, 2.) * 4. + nc * (1. - progress));
 
   vec4 finalImage = mix(imageDistorted, image, clamp(finalMask + progress, 0., 1.));
 

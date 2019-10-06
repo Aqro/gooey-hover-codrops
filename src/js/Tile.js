@@ -1,15 +1,14 @@
 import * as THREE from 'three'
-import { TweenMax as TM, Power2, Power3, Power4, Expo } from 'gsap/all'
+import { TweenMax as TM, Power2, Power3, Expo } from 'gsap/all'
 import Scrollbar from 'smooth-scrollbar'
 import vertexShader from '../glsl/vertexShader.glsl'
-import circleShader from '../glsl/circleShader.glsl'
 import { SplitText as ST } from './vendors/gsap/SplitText'
 
 import { clamp, getRatio, wrap, ev } from './utils/utils'
 
 export default class Tile {
 
-    constructor($el, scene) {
+    constructor($el, scene, duration, fragmentShader) {
         this.scene = scene
         this.$els = {
             body: document.body,
@@ -19,13 +18,15 @@ export default class Tile {
             title: $el.querySelector('.tile__title').innerText,
         }
 
+        this.duration = duration
+
         this.mainImage = this.$els.el.querySelector('img')
         this.images = []
         this.sizes = new THREE.Vector4(0, 0, 0, 0)
         this.offset = new THREE.Vector2(0, 0)
 
         this.vertexShader = vertexShader
-        this.fragmentShader = circleShader
+        this.fragmentShader = fragmentShader
 
         this.clock = new THREE.Clock()
 
@@ -38,7 +39,7 @@ export default class Tile {
         this.isZoomed = false
 
         this.loader = new THREE.TextureLoader()
-        this.preload([this.mainImage.src, this.mainImage.dataset.hover], () => { this.initTile() })
+        this.preload([this.mainImage.src, this.mainImage.dataset.hover, '/dist/img/shape.jpg'], () => { this.initTile() })
 
         this.Scroll = Scrollbar.get(document.querySelector('.scrollarea'))
 
@@ -77,6 +78,8 @@ export default class Tile {
     }
 
     onPointerEnter() {
+        this.isHovering = true
+
         if (this.isZoomed) return
 
         const idx = clamp([...this.$els.el.parentElement.children].indexOf(this.$els.el) + 1, 1, 5)
@@ -86,7 +89,7 @@ export default class Tile {
 
         if (!this.mesh) return
 
-        TM.to(this.uniforms.u_progressHover, 0.5, {
+        TM.to(this.uniforms.u_progressHover, this.duration, {
             value: 1,
             ease: Power2.easeInOut,
         })
@@ -95,9 +98,12 @@ export default class Tile {
     onPointerLeave() {
         if (!this.mesh || this.isZoomed) return
 
-        TM.to(this.uniforms.u_progressHover, 0.5, {
+        TM.to(this.uniforms.u_progressHover, this.duration, {
             value: 0,
             ease: Power2.easeInOut,
+            onComplete: () => {
+                this.isHovering = false
+            },
         })
     }
 
@@ -147,10 +153,10 @@ export default class Tile {
             u_ratio: { value: getRatio(this.sizes, texture.image) },
             u_hovermap: { type: 't', value: hoverTexture },
             u_hoverratio: { value: getRatio(this.sizes, hoverTexture.image) },
+            u_shape: { value: this.images[2] },
             u_mouse: { value: this.mouse },
             u_progressHover: { value: 0 },
             u_progressClick: { value: 0 },
-            u_progressLoading: { value: 0 },
             u_time: { value: this.clock.getElapsedTime() + THREE.Math.randFloat(1, 1000) },
             u_res: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         }
@@ -203,9 +209,10 @@ export default class Tile {
 
         this.move()
 
-        this.uniforms.u_time.value += this.clock.getDelta()
-
         this.prevScroll = this.scroll
+
+        if (!this.isHovering) return
+        this.uniforms.u_time.value += this.clock.getDelta()
     }
 
     zoom({ tile, open }) {
@@ -310,8 +317,6 @@ export default class Tile {
         const preloadImage = ($el, anImageLoadedCallback) => {
             const image = this.loader.load($el, anImageLoadedCallback)
             image.center.set(0.5, 0.5)
-            image.wrapS = THREE.RepeatWrapping
-            image.wrapT = THREE.RepeatWrapping
             this.images.push(image)
         }
 
