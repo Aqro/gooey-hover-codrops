@@ -16,7 +16,7 @@ uniform vec2 u_hoverratio;
 varying vec2 v_uv;
 
 float circle(in vec2 _st, in float _radius, in float blurriness){
-    vec2 dist = _st;
+    vec2 dist = _st - vec2(0.5);
 	  return 1. - smoothstep(_radius-(_radius*blurriness), _radius+(_radius*blurriness), dot(dist,dist)*4.0);
 }
 
@@ -25,7 +25,6 @@ void main() {
   vec2 resolution = u_res * PR;
   float time = u_time * 0.05;
   float progress = u_progressClick;
-
   float progressHover = u_progressHover;
   vec2 uv = v_uv;
   vec2 uv_h = v_uv;
@@ -37,32 +36,28 @@ void main() {
   vec2 mouse = vec2((u_mouse.x / u_res.x) * 2. - 1.,-(u_mouse.y / u_res.y) * 2. + 1.) * -.5;
   mouse.y *= resolution.y / resolution.x;
 
-  vec2 cpos = st + mouse;
 
-  float c = circle(cpos, .02 * progressHover + progress * 0.8, 2.);
-
-  float offX = uv.x + sin(uv.y + time * 2.);
-  float offY = uv.y - time * .2 - cos(time * 2.) * 0.1;
+  float offX = uv.x * .3 - time * 0.3;
+  float offY = uv.y + sin(uv.x * 5.) * .1 - sin(time * 0.5);
+  offX += snoise3(vec3(offX, offY, time) * 5.) * .3;
+  offY += snoise3(vec3(offX, offX, time * 0.3)) * .1;
   float nc = (snoise3(vec3(offX, offY, time * .5) * 8.)) * progressHover;
   float nh = (snoise3(vec3(offX, offY, time * .5 ) * 2.)) * .03;
 
+  nh *= smoothstep(nh, 0.5, 0.6);
+
   uv_h -= vec2(0.5);
-  uv_h *= 1. - u_progressHover * 0.1;
+  uv_h *= u_hoverratio;
   uv_h += vec2(0.5);
 
-  uv_h *= u_hoverratio;
-
   uv -= vec2(0.5);
-  uv *= 1. - u_progressHover * 0.2;
   uv *= u_ratio;
   uv += vec2(0.5);
 
-  vec4 image = texture2D(u_hovermap, uv_h);
+  vec4 image = texture2D(u_hovermap, uv_h + vec2(nc) * progress) + nc * 0.5 * (1. - progress) + nh * 0.5 * (1. - progress);
   vec4 imageDistorted = texture2D(u_map, uv + vec2(nh) * progressHover);
 
-  float finalMask = smoothstep(.99, 1., pow(c, 2.) * 4. + nc * (1. - progress));
-
-  vec4 finalImage = mix(imageDistorted, image, clamp(finalMask + progress, 0., 1.));
+  vec4 finalImage = mix(imageDistorted, image, clamp(nc * (1. - progress) + progress, 0., 1.));
 
   gl_FragColor = vec4(finalImage.rgb, u_alpha);
 }

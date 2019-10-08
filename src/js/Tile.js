@@ -157,7 +157,7 @@ export default class Tile {
             u_mouse: { value: this.mouse },
             u_progressHover: { value: 0 },
             u_progressClick: { value: 0 },
-            u_time: { value: this.clock.getElapsedTime() + THREE.Math.randFloat(1, 1000) },
+            u_time: { value: this.clock.getElapsedTime() },
             u_res: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         }
 
@@ -306,6 +306,8 @@ export default class Tile {
         //     x: this.isZoomed ? window.innerWidth / 2 - window.innerWidth * 0.05 - this.sizes.x * 0.95 : x,
         //     y: this.isZoomed ? -20 : y,
         // }
+
+        if (this.sizes.equals(new THREE.Vector4(w, h, x, y))) return
 
         this.sizes.set(w, h, x, y)
         this.offset.set(this.sizes.z - window.innerWidth / 2 + this.sizes.x / 2, -this.sizes.w + window.innerHeight / 2 - this.sizes.y / 2)

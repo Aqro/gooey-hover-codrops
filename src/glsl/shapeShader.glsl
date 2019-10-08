@@ -17,11 +17,6 @@ uniform float u_progressClick;
 
 varying vec2 v_uv;
 
-float circle(in vec2 _st, in float _radius, in float blurriness){
-    vec2 dist = _st-vec2(0.5);
-	  return 1.-smoothstep(_radius-(_radius*blurriness), _radius+(_radius*blurriness), dot(dist,dist)*4.0);
-}
-
 
 void main() {
   vec2 resolution = u_res * PR;
@@ -41,7 +36,7 @@ void main() {
   uv *= u_ratio;
   uv += vec2(0.5);
 
-  vec2 shapeUv = (st + mouse) * PR * 2.;
+  vec2 shapeUv = (st + mouse) * 4.;
   shapeUv *= 1.5 - (progressHover + progress) * 0.8;
   shapeUv /= progressHover;
   shapeUv += vec2(.5);

@@ -25,13 +25,6 @@ void main() {
   float progress = u_progressClick;
   float progressHover = u_progressHover;
 
-  vec2 st = gl_FragCoord.xy / resolution.xy - vec2(.5);
-  st.y *= resolution.y / resolution.x;
-
-  vec2 mouse = vec2((u_mouse.x / u_res.x) * 2. - 1.,-(u_mouse.y / u_res.y) * 2. + 1.) * -.5;
-  mouse.y *= resolution.y / resolution.x;
-
-
   float shape = (uv.x + uv.y - 2. + progressHover * 2.7 + progress * 2.7) * 2.;
   float offX = uv.x + uv.y;
   float offY = uv.y - uv.x;
