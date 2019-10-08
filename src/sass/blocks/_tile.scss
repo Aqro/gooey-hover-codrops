@@ -42,7 +42,9 @@
     transition: color .3s;
 
     .tile:hover & {
-        color: #fff;
+        @include hover(false) {
+            color: #fff;
+        }
     }
 }
 

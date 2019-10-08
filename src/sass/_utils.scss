@@ -38,3 +38,40 @@
 
 $bp-mobile: 768px;
 $bp-tablet: 1112px;
+
+
+/* HOVER
+---------------------------------------------------------------------------------------------------- */
+/// Mixin for handling hover states
+/// 'mouse'      :    Handle mouse, touch pad
+/// 'touch'      :    Handle smartphones, touchscreens
+/// 'stylus'     :    Handle stylus-based screens
+/// 'controller' :    Handle Nintendo Wii controller, Microsoft Kinect
+
+$mq-input: (
+    'mouse'      : '(hover: hover) and (pointer: fine)',
+    'touch'      : '(hover: none) and (pointer: coarse)',
+    'stylus'     : '(hover: none) and (pointer: fine)',
+    'controller' : '(hover: hover) and (pointer: coarse)'
+);
+
+@mixin hover($preset: false, $device: 'mouse', $active: false, $handleIE: false) {
+    $device: if($device == null, 'mouse', $device);
+    $mediaquery  : map-get($mq-input, $device);
+
+    $activeState : if($active, '&:active, ', '');
+    $ieState     : if($handleIE, ', .ie &:hover, .ie &:focus', '');
+    $selectors   : $activeState + '&:hover, &:focus' + $ieState;
+
+    @media #{$mediaquery} {
+        @if $preset {
+            #{$selectors} {
+                @content;
+            }
+        }
+
+        @else {
+            @content;
+        }
+    }
+}

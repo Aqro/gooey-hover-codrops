@@ -22,7 +22,7 @@ export default class Tile {
 
         this.mainImage = this.$els.el.querySelector('img')
         this.images = []
-        this.sizes = new THREE.Vector4(0, 0, 0, 0)
+        this.sizes = new THREE.Vector2(0, 0)
         this.offset = new THREE.Vector2(0, 0)
 
         this.vertexShader = vertexShader
@@ -66,6 +66,8 @@ export default class Tile {
     onClick(e) {
         e.preventDefault()
 
+        if (APP.Layout.isMobile) return
+
         if (!this.mesh) return
 
         this.hasClicked = true
@@ -80,7 +82,7 @@ export default class Tile {
     onPointerEnter() {
         this.isHovering = true
 
-        if (this.isZoomed) return
+        if (this.isZoomed || this.hasClicked || APP.Layout.isMobile) return
 
         const idx = clamp([...this.$els.el.parentElement.children].indexOf(this.$els.el) + 1, 1, 5)
 
@@ -96,7 +98,7 @@ export default class Tile {
     }
 
     onPointerLeave() {
-        if (!this.mesh || this.isZoomed) return
+        if (!this.mesh || this.isZoomed || this.hasClicked || APP.Layout.isMobile) return
 
         TM.to(this.uniforms.u_progressHover, this.duration, {
             value: 0,
@@ -121,7 +123,7 @@ export default class Tile {
     }
 
     onMouseMove(event) {
-        if (this.isZoomed) return
+        if (this.isZoomed || this.hasClicked || APP.Layout.isMobile) return
 
         TM.to(this.mouse, 0.5, {
             x: event.clientX,
@@ -295,7 +297,7 @@ export default class Tile {
     --------------------------------------------------------- */
 
     getBounds() {
-        const { width: w, height: h, left: x, top: y } = this.mainImage.getBoundingClientRect()
+        const { width, height, left, top } = this.mainImage.getBoundingClientRect()
 
         // const newScl = {
         //     w: this.isZoomed ? window.innerWidth * 0.44 : w,
@@ -307,10 +309,10 @@ export default class Tile {
         //     y: this.isZoomed ? -20 : y,
         // }
 
-        if (this.sizes.equals(new THREE.Vector4(w, h, x, y))) return
+        if (this.offset.equals(new THREE.Vector2(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2))) return
 
-        this.sizes.set(w, h, x, y)
-        this.offset.set(this.sizes.z - window.innerWidth / 2 + this.sizes.x / 2, -this.sizes.w + window.innerHeight / 2 - this.sizes.y / 2)
+        this.sizes.set(width, height)
+        this.offset.set(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2)
     }
 
     preload($els, allImagesLoadedCallback) {

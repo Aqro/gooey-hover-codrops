@@ -83,8 +83,10 @@ a {
 
 a:hover,
 a:focus {
-    color: var(--color-link-hover);
-    outline: none;
+    @include hover(false) {
+        color: var(--color-link-hover);
+        outline: none;
+    }
 }
 
 .message {
