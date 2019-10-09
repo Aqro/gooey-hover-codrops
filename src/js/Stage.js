@@ -78,7 +78,7 @@ export default class Stage {
     }
 
     lockScroll({ lock }) {
-        const duration = lock ? 0 : 0.5
+        const duration = lock ? 0 : 1.8
 
         TM.delayedCall(duration, () => {
             this.Scroll.updatePluginOptions('horizontalScroll', {

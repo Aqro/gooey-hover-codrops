@@ -38,7 +38,7 @@ void main() {
 
 
   float offX = uv.x * .3 - time * 0.3;
-  float offY = uv.y + sin(uv.x * 5.) * .1 - sin(time * 0.5);
+  float offY = uv.y + sin(uv.x * 5.) * .1 - sin(time * 0.5) + snoise3(vec3(uv.x, uv.y, time) * 0.5);
   offX += snoise3(vec3(offX, offY, time) * 5.) * .3;
   offY += snoise3(vec3(offX, offX, time * 0.3)) * .1;
   float nc = (snoise3(vec3(offX, offY, time * .5) * 8.)) * progressHover;
@@ -54,10 +54,10 @@ void main() {
   uv *= u_ratio;
   uv += vec2(0.5);
 
-  vec4 image = texture2D(u_hovermap, uv_h + vec2(nc) * progress) + nc * 0.5 * (1. - progress) + nh * 0.5 * (1. - progress);
-  vec4 imageDistorted = texture2D(u_map, uv + vec2(nh) * progressHover);
+  vec4 image = texture2D(u_map, uv_h + vec2(nc + nh) * progressHover);
+  vec4 hover = texture2D(u_hovermap, uv + vec2(nc + nh) * progressHover * (1. - progress));
 
-  vec4 finalImage = mix(imageDistorted, image, clamp(nc * (1. - progress) + progress, 0., 1.));
+  vec4 finalImage = mix(image, hover, clamp(nh * (1. - progress) + progressHover, 0., 1.));
 
   gl_FragColor = vec4(finalImage.rgb, u_alpha);
 }

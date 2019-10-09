@@ -72,7 +72,6 @@ export default class Tile {
 
         this.hasClicked = true
 
-
         ev('toggleDetail', {
             open: true,
             target: this,
@@ -243,6 +242,11 @@ export default class Tile {
                 this.isZoomed = shouldZoom
                 this.hasClicked = open
 
+                TM.to(this.uniforms.u_progressHover, this.duration, {
+                    value: shouldZoom ? 1 : 0,
+                    ease: Power2.easeInOut,
+                })
+
                 ev('view:toggle', { shouldOpen: shouldZoom, target: this })
             },
         })
@@ -298,16 +302,6 @@ export default class Tile {
 
     getBounds() {
         const { width, height, left, top } = this.mainImage.getBoundingClientRect()
-
-        // const newScl = {
-        //     w: this.isZoomed ? window.innerWidth * 0.44 : w,
-        //     h: this.isZoomed ? window.innerHeight - 140 : h,
-        // }
-
-        // const newPos = {
-        //     x: this.isZoomed ? window.innerWidth / 2 - window.innerWidth * 0.05 - this.sizes.x * 0.95 : x,
-        //     y: this.isZoomed ? -20 : y,
-        // }
 
         if (this.offset.equals(new THREE.Vector2(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2))) return
 

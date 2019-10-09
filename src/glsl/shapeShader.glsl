@@ -33,6 +33,7 @@ void main() {
   mouse.y *= resolution.y / resolution.x;
 
   uv -= vec2(0.5);
+  uv *= 1. - u_progressHover * 0.03;
   uv *= u_ratio;
   uv += vec2(0.5);
 
@@ -49,12 +50,13 @@ void main() {
   float n = snoise3(vec3(offX, offY, time) * 5.) + 2.;
 
   uv_h -= vec2(0.5);
+  uv_h *= 1. - progressHover * 0.05;
   uv_h *= u_hoverratio;
   uv_h += vec2(0.5);
 
 
-  vec4 image = texture2D(u_map, uv);
-  vec4 hover = texture2D(u_hovermap, uv_h);
+  vec4 image = texture2D(u_map, uv + mouse * 0.05 * progressHover * (1. - progress));
+  vec4 hover = texture2D(u_hovermap, uv_h + mouse * 0.5 * progressHover * (1. - progress));
 
   float pct = smoothstep(.99, 1., clamp(n - s, 0., 1.) + progress);
 

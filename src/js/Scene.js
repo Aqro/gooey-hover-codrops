@@ -6,25 +6,25 @@ import { ev } from './utils/utils'
 import trippyShader from '../glsl/trippyShader.glsl'
 import shapeShader from '../glsl/shapeShader.glsl'
 import revealShader from '../glsl/revealShader.glsl'
-import voroShader from '../glsl/voroShader.glsl'
+import gooeyShader from '../glsl/gooeyShader.glsl'
 import waveShader from '../glsl/waveShader.glsl'
 
 const perspective = 800
 
 const shaders = [
     trippyShader,
-    revealShader,
     shapeShader,
-    voroShader,
+    gooeyShader,
     waveShader,
+    revealShader,
 ]
 
 const durations = [
     0.5,
-    1.2,
     0.5,
     0.5,
     0.5,
+    0.8,
 ]
 
 export default class Scene {
