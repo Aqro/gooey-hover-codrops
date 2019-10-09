@@ -2,9 +2,9 @@
 
 Learn how to create a reveal gooey effect on an image with Three using noise within a shader.
 
-![Image Title](link)
+![Thumbnail Gooey Hover Effect](https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2019/10/ThumbnailGooeyHoverEffect.jpg)
 
-[Article on Codrops](https://tympanus.net/codrops/?p=)
+[Article on Codrops](https://tympanus.net/codrops/?p=43947)
 
 [Demo](http://tympanus.net/Development/.../)
 
@@ -12,6 +12,7 @@ Learn how to create a reveal gooey effect on an image with Three using noise wit
 
 - Images from [Unsplash](https://unsplash.com)
 - [Three.js](https://threejs.org/docs/)
+- [GSAP from GreenSock](https://greensock.com/)
 - [glslify](https://github.com/glslify/glslify)
 - [glsl-noise](https://www.npmjs.com/package/glsl-noise)
 
