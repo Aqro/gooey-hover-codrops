@@ -60,7 +60,7 @@ void main() {
   float c = circle(cpos, .04 * progressHover + progress * 0.8, 2.) * 50.;
 
   vec4 image = texture2D(u_map, uv);
-  vec4 hover = texture2D(u_hovermap, uv_h);
+  vec4 hover = texture2D(u_hovermap, uv_h + mouse * 0.1 * progressHover);
 
   float pct = smoothstep(.99, 1., n + shape);
 
