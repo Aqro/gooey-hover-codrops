@@ -303,10 +303,13 @@ export default class Tile {
     getBounds() {
         const { width, height, left, top } = this.mainImage.getBoundingClientRect()
 
-        if (this.offset.equals(new THREE.Vector2(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2))) return
+        if (!this.sizes.equals(new THREE.Vector2(width, height))) {
+            this.sizes.set(width, height)
+        }
 
-        this.sizes.set(width, height)
-        this.offset.set(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2)
+        if (!this.offset.equals(new THREE.Vector2(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2))) {
+            this.offset.set(left - window.innerWidth / 2 + width / 2, -top + window.innerHeight / 2 - height / 2)
+        }
     }
 
     preload($els, allImagesLoadedCallback) {

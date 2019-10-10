@@ -39,7 +39,10 @@
 }
 
 .slideshow-list__el {
-    flex: 0 0 calc(50% + 10vmax);
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 25rem;
+    max-width: 40vmin;
     margin-left: 15vw;
 
     &:last-child {
@@ -62,7 +65,6 @@
     }
 
     @include minw($bp-mobile) {
-        flex: 0 0 calc(25% + 2vmax);
         margin-left: 20vw;
     }
 }

@@ -51,9 +51,13 @@
         max-width: 35vw;
 
         font-size: 1.8rem;
-        line-height: 1.7;
+        line-height: 1.9;
 
         opacity: .7;
+
+        &:not(:last-child) {
+            margin-bottom: 3rem;
+        }
     }
 }
 

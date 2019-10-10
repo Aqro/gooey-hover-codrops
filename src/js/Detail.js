@@ -61,7 +61,7 @@ export default class DetailView {
             yPercent: 0,
             ease: Power3.easeInOut,
             force3D: true,
-        }, 1.4 / this.stgs.lines.length)
+        }, 0.5 / this.stgs.lines.length)
 
         this.onToggleView()
     }
@@ -78,7 +78,7 @@ export default class DetailView {
             yPercent: 100,
             ease: Power3.easeInOut,
             force3D: true,
-        }, 1.4 / this.stgs.lines.length, () => {
+        }, 0.5 / this.stgs.lines.length, () => {
             this.onToggleView(false)
             unwrap(this.stgs.lines)
         })
