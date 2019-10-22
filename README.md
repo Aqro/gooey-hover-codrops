@@ -8,6 +8,23 @@ Learn how to create a reveal gooey effect on an image with Three using noise wit
 
 [Demo](http://tympanus.net/Development/.../)
 
+## Installation
+Run this command in the terminal
+```
+npm install
+```
+
+Compile the code
+```
+npm run build
+```
+
+Compile the code with a local server
+```
+npm run watch
+```
+
+
 ## Credits
 
 - Images from [Unsplash](https://unsplash.com)
