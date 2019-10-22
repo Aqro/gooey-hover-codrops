@@ -1,12 +1,12 @@
 # Gooey Hover Effects on Images with Three.js
 
-Learn how to create a gooey reveal hover effect on an image with Three.js using noise within a shader.
+Learn how to create a gooey reveal hover effects on images with Three.js using noise within a shader.
 
 ![Thumbnail Gooey Hover Effect](https://codrops.net/codrops/wp-content/uploads/2019/10/ThumbnailGooeyHoverEffect.jpg)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=43947)
 
-[Demo](http://tympanus.net/Tutorials/GooeyHoverEffects/)
+[Demo](http://tympanus.net/Tutorials/GooeyImageHoverEffects/)
 
 ## Installation
 Run this command in the terminal
